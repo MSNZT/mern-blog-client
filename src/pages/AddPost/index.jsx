@@ -38,7 +38,7 @@ export const AddPost = () => {
     if (isEditing) {
       axios.get(`/post/${id}`).then(({data}) => {
         if (data.imageUrl) {
-          setImageUrl(`http://localhost:4444${data.imageUrl}`);
+          setImageUrl(`${process.env.REACT_APP_API_URL}${data.imageUrl}`);
           setFile(data.imageUrl.substring(1))
         }
         setText(data.text);
