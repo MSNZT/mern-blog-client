@@ -39,6 +39,7 @@ export const AddPost = () => {
       axios.get(`/post/${id}`).then(({data}) => {
         if (data.imageUrl) {
           setImageUrl(`${process.env.REACT_APP_API_URL}${data.imageUrl}`);
+          // setImageUrl(`http://localhost:4444${data.imageUrl}`);
           setFile(data.imageUrl.substring(1))
         }
         setText(data.text);
@@ -102,7 +103,6 @@ export const AddPost = () => {
         fileData.append('image', file[0]);
         data = await axios.post("/upload", fileData);
       }
-      console.log(value)
       const obj = {
         title,
         text: text,
@@ -112,7 +112,7 @@ export const AddPost = () => {
       if (!tags) {
         delete obj.tags
       }
-      console.log(obj)
+      console.log(obj.imageUrl)
       const post = isEditing ? await axios.patch(`/post/${id}`, obj) : await axios.post("/post/create", obj)
       const _id = isEditing ? id : post.data._id
       navigate(`/post/${_id}`)

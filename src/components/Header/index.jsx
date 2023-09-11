@@ -3,12 +3,11 @@ import Button from '@mui/material/Button';
 
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout, selectIsAuth} from "../../redux/slices/authSlice";
 
 export const Header = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(selectIsAuth);
   const isAuth = window.localStorage.getItem('token') || auth;
@@ -22,7 +21,7 @@ export const Header = () => {
     <div className={styles.root}>
       <Container maxWidth="lg">
         <div className={styles.inner}>
-          <Link className={styles.logo} to="/" onClick={() => navigate('/')}>
+          <Link className={styles.logo} to="/" >
             <div>BLOG</div>
           </Link>
           <div className={styles.buttons}>

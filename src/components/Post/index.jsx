@@ -56,6 +56,7 @@ export const Post = ({
         <img
           className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
           src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
+          // src={`http://localhost:4444${imageUrl}`}
           alt={title}
         />
       )}
@@ -68,7 +69,7 @@ export const Post = ({
           <ul className={styles.tags}>
             {tags.map((name, i) => (
               <li key={i}>
-                <Link to={`/tag/${name}`}>#{name}</Link>
+                <Link to={`/tags/${name}`}>#{name}</Link>
               </li>
             ))}
           </ul>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styles from "./AddComment.module.scss";
 
@@ -14,27 +14,34 @@ export const Index = ({onClick}) => {
   const dispatch = useDispatch()
   const {id} = useParams();
   const {data} = useSelector(state => state.auth);
+  const [authMessage, setAuthMessage] = useState(false);
   const {register, handleSubmit, setValue, formState: {errors}} = useForm();
 
   const submit = ({text}) => {
-    const obj = {
-      text: text,
-      _id: id
+    if (data) {
+      const obj = {
+        text: text,
+        _id: id
+      }
+      dispatch(fetchCommentsCreate(obj));
+      dispatch(addComment({text, user: {
+          fullName: data.fullName,
+          avatarUrl: data.avatarUrl
+        }}))
+      setValue('text', '');
+      onClick(text)
+    } else {
+      setAuthMessage(true);
+      setValue('text', '');
+      return
     }
-    dispatch(fetchCommentsCreate(obj));
-    dispatch(addComment({text, user: {
-        fullName: data.fullName,
-        avatarUrl: data.avatarUrl
-    }}))
-    setValue('text', '');
-    onClick(text)
   }
   return (
     <>
       <div className={styles.root}>
         <Avatar
           classes={{ root: styles.avatar }}
-          src={data.avatarUrl}
+          src={data && data.avatarUrl}
         />
         <div className={styles.form}>
           <form onSubmit={handleSubmit(submit)}>
@@ -51,6 +58,7 @@ export const Index = ({onClick}) => {
                 }}
               )}
             />
+            {authMessage && <p>Вы не авторизованы</p>}
             <Button type='submit' variant="contained">Отправить</Button>
           </form>
         </div>

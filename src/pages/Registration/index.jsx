@@ -16,9 +16,9 @@ export const Registration = () => {
   const isAuth = useSelector(selectIsAuth);
   const {register, handleSubmit, formState: {errors, isValid}} = useForm({
     defaultValues: {
-      fullName: 'Яр Кар',
-      email: 'qaq@mail.ru',
-      password: '12345'
+      fullName: '',
+      email: '',
+      password: ''
     }
   });
 

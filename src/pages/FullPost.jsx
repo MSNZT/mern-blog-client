@@ -16,9 +16,7 @@ export const FullPost = () => {
   const [isLoading, setLoading] = useState(true);
 
   const handleComments = (value) => {
-    console.log(comments)
     setComments(oldArray => [...oldArray, {text: value, user: {fullName: auth.data.fullName, avatarUrl: auth.data.avatarUrl}}]);
-    console.log(comments)
   }
 
   useEffect(() => {

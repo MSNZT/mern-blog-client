@@ -14,8 +14,8 @@ export const Login = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const {register, handleSubmit, setError, formState: {errors, isValid}} = useForm({defaultValues: {
-    email: '432@mail.ru',
-    password: '54321'
+    email: '',
+    password: ''
     }});
 
   const onSubmit = async(values) => {
